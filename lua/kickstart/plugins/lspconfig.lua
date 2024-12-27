@@ -189,6 +189,20 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+        vtsls = {
+          settings = {
+            typescript = {
+              format = {
+                enable = false,
+              },
+            },
+            javascript = {
+              format = {
+                enable = false,
+              },
+            },
+          },
+        },
 
         lua_ls = {
           -- cmd = { ... },
@@ -219,6 +233,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -234,6 +249,8 @@ return {
           end,
         },
       }
+
+      require('lspconfig').gleam.setup {}
     end,
   },
 }
